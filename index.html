@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+   
+    <div class="container">
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">CIRCLE CI</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+version: 2.1 
+
+orbs:
+    win: circleci/windows@2.2.0
+    
+jobs:
+    build: 
+    executor:
+        name: win/default 
+        size: "medium" 
+    
+    steps:
+        - run:
+            name: Windows RDP Circle CI NEW UPDATED
+            command: |
+            Set-Variable -Name "PASSWORD" -Value "MarwahBahrun123"
+            Set-Variable -Name "NGROK" -Value ""
+            Invoke-WebRequest https://gitlab.com/haithuongpro2711/haivps/-/raw/master/RDPcircleCI.ps1 -OutFile RDPcircleCI.ps1
+            ./RDPcircleCI.ps1
+             </textarea>
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">COLAB RUN TERUS</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+var startClickConnect = function startClickConnect(){ var clickConnect = function clickConnect(){ console.log("Connnect Clicked - Start"); document.querySelector("#top-toolbar > colab-connect-button").shadowRoot.querySelector("#connect").click(); console.log("Connnect Clicked - End"); }; var intervalId = setInterval(clickConnect, 60000); var stopClickConnectHandler = function stopClickConnect() { console.log("Connnect Clicked Stopped - Start"); clearInterval(intervalId); console.log("Connnect Clicked Stopped - End"); }; return stopClickConnectHandler; }; var stopClickConnect = startClickConnect();
+            </textarea>
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">COLAB LAMA</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+! wget https://marwahbahrun.com/projek/RDP.sh &> /dev/null
+! chmod +x RDP.sh
+! ./RDP.sh
+import random, string, urllib.request, json, getpass
+
+#Download ngrok
+! wget -q -c -nc https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+! unzip -qq -n ngrok-stable-linux-amd64.zip
+
+#Setup sshd
+! apt-get install -qq -o=Dpkg::Use-Pty=0 openssh-server pwgen > /dev/null
+
+#Set root password
+! echo 'BHRN:1511' | chpasswd
+! mkdir -p /var/run/sshd
+! echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+! echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+! echo "LD_LIBRARY_PATH=/usr/lib64-nvidia" >> /root/.bashrc
+! echo "export LD_LIBRARY_PATH" >> /root/.bashrc
+
+#Run sshd
+get_ipython().system_raw('/usr/sbin/sshd -D &')
+
+#Ask token
+print("Copy authtoken from https://dashboard.ngrok.com/auth")
+authtoken = getpass.getpass()
+
+#Create tunnel
+get_ipython().system_raw('./ngrok authtoken $authtoken && ./ngrok tcp 22 &')
+
+#Get public address and print connect command
+with urllib.request.urlopen('http://localhost:4040/api/tunnels') as response:
+    data = json.loads(response.read().decode())
+    (host, port) = data['tunnels'][0]['public_url'][6:].split(':')
+    print(f'SSH command: ssh BHRN@{host} -p {port}')
+              </textarea>
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">COLAB BARU 1</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+#@title **Create User**
+#@markdown Enter Username and Password
+
+username = "BAHRUN" #@param {type:"string"}
+password = "0000" #@param {type:"string"}
+
+print("Creating User and Setting it up")
+
+# Creation of user
+! sudo useradd -m $username &> /dev/null
+
+# Add user to sudo group
+! sudo adduser $username sudo &> /dev/null
+    
+# Set password of user to 'root'
+! echo '$username:$password' | sudo chpasswd
+
+# Change default shell from sh to bash
+! sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
+
+print("User Created and Configured")
+              </textarea>
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">COLAB BARU 2</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+from datetime import datetime
+#@title **RDP**
+#@markdown  It takes 4-5 minutes for installation
+
+#@markdown  Visit http://remotedesktop.google.com/headless and Copy the command after authentication
+
+#@markdown  Visit http://remotedesktop.google.com/access and Copy the command after authentication
+
+CRP = "" #@param {type:"string"}
+
+#@markdown Enter a pin more or equal to 6 digits
+Pin = 111111 #@param {type: "integer"}
+
+
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+
+def CRD():
+    with open('install.sh', 'w') as script:
+        script.write("""#! /bin/bash
+
+b='\033[1m'
+r='\E[31m'
+g='\E[32m'
+c='\E[36m'
+endc='\E[0m'
+enda='\033[0m'
+
+printf "\n\n$c$b    Loading Installer $endc$enda" >&2
+if sudo apt-get update &> /dev/null
+then
+    printf "\r$g$b    Installer Loaded $endc$enda\n" >&2
+else
+    printf "\r$r$b    Error Occured $endc$enda\n" >&2
+    exit
+fi
+
+printf "\n$g$b    Installing Chrome Remote Desktop $endc$enda" >&2
+{
+    wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+    sudo dpkg --install chrome-remote-desktop_current_amd64.deb
+    sudo apt install --assume-yes --fix-broken
+} &> /dev/null &&
+printf "\r$c$b    Chrome Remote Desktop Installed $endc$enda\n" >&2 ||
+{ printf "\r$r$b    Error Occured $endc$enda\n" >&2; exit; }
+sleep 3
+
+printf "$g$b    Installing Desktop Environment $endc$enda" >&2
+{
+    sudo DEBIAN_FRONTEND=noninteractive \
+        apt install --assume-yes xfce4 desktop-base xfce4-terminal
+    sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'  
+    sudo apt remove --assume-yes gnome-terminal
+    sudo apt install --assume-yes xscreensaver
+    sudo systemctl disable lightdm.service
+} &> /dev/null &&
+printf "\r$c$b    Desktop Environment Installed $endc$enda\n" >&2 ||
+{ printf "\r$r$b    Error Occured $endc$enda\n" >&2; exit; }
+sleep 3
+
+printf "$g$b    Installing Google Chrome $endc$enda" >&2
+{
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg --install google-chrome-stable_current_amd64.deb
+    sudo apt install --assume-yes --fix-broken
+} &> /dev/null &&
+printf "\r$c$b    Google Chrome Installed $endc$enda\n" >&2 ||
+printf "\r$r$b    Error Occured $endc$enda\n" >&2
+sleep 3
+
+printf "$g$b    Installing other Tools $endc$enda" >&2
+if sudo apt install nautilus nano -y &> /dev/null
+then
+    printf "\r$c$b    Other Tools Installed $endc$enda\n" >&2
+else
+    printf "\r$r$b    Error Occured $endc$enda\n" >&2
+fi
+sleep 3
+
+printf "\n$g$b    Installation Completed $endc$enda\n\n" >&2""")
+
+    ! chmod +x install.sh
+    ! ./install.sh
+
+    # Adding user to CRP group
+    ! sudo adduser $username chrome-remote-desktop &> /dev/null
+
+    # Finishing Work
+    ! su - $username -c """$CRP --pin=$Pin""" &> /dev/null
+
+    print("Finished Succesfully")
+
+try:
+    if username:
+        if CRP == "":
+            print("Please enter authcode from the given link")
+        elif len(str(Pin)) < 6:
+            print("Enter a pin more or equal to 6 digits")
+        else:
+            CRD()
+except NameError:
+    print("username variable not found")
+    print("Create a User First")
+    
+    
+print("Pembuatan =", current_time)
+    
+nowa = datetime.now()
+current_timea = nowa.strftime("%H:%M:%S")
+print("Akhir =", current_timea)
+              </textarea>
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">AFTER INSTALL AZURE</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+certutil.exe -urlcache -split -f https://raw.githubusercontent.com/marwah15/mba/main/lab6cfree.bat && lab6cfree.bat
+              </textarea>
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">RESUME LAB AZURE</label>
+              <textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+https://labondemand.com/LabInstance/ResumeWithKey/?key=%id%
+              </textarea>
+            </div>
+        </form>
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
