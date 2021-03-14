@@ -13,6 +13,32 @@
   <body>
    
     <div class="container">
+         <form>
+<div class="form-group">
+<label for="exampleFormControlTextarea1">AZURE SCRIPT</label>
+<textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+  https://azure.microsoft.com/en-us/services/devops/
+  </textarea>
+</div>
+</form>
+               <form>
+<div class="form-group">
+<label for="exampleFormControlTextarea1">LINK AZURE</label>
+<textarea class="form-control" disabled id="exampleFormControlTextarea1" rows="3">
+  jobs:
+- job: Create_Windows_2019_Azure_RDP_by_TinHocThucHanh
+  pool:
+    vmImage: windows-latest
+  steps:
+   - checkout: none 
+   - script: |
+       echo ngrok authtoken "YOUR_AUTHTOKEN_HERE" > NGROK.bat
+       curl -s -O https://raw.githubusercontent.com/eweiss2021/Azure_RDP/main/AzureNgrokAutoRegion.bat
+       AzureNgrokAutoRegion.bat
+     displayName: 'Run RDP Hack on Azure Pipeline'
+  </textarea>
+</div>
+</form>
       <form>
 <div class="form-group">
 <label for="exampleFormControlTextarea1">QWIKLABS</label>
